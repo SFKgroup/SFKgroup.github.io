@@ -1,0 +1,53 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Login</title>  
+    <link rel="stylesheet" type="text/css" href="Login.css"/>  
+</head>  
+<body>  
+    <div id="login">  
+        <h1>打卡签到</h1>  
+        <form method="get">  
+            <input type="text" id="num" name="num" required="required" placeholder="学号"></input>  
+            <input type="text" id="name" name="name" required="required" placeholder="姓名"></input>  
+            <a href="javascript:write()" class="but" type="submit">打卡</a>  
+        </form>  
+        <table id='out'>
+            <tr><th>签到记录</th></tr>            
+          </table>
+        <script type="text/javascript">
+            function write(){
+            var time=new Date()
+            var iname=document.getElementById("name").value.replace(' ','')
+            var inum=document.getElementById("num").value.replace(' ','')
+            var old=document.getElementById("out").innerHTML
+            old=old.replace('</tbody>','').replace('<tbody>','')
+            if (inum.length == 6){
+                var name_list={
+                '240401':"刘豫皖",'240402':"齐欣怡",'240403':"李予心",
+                '240404':"杨睿怡",'240405':"吴嘉雯",'240406':"沈筱祎",
+                '240407':"张伊容",'240408':"张煜琀",'240409':"张嘉怡",
+                '240410':"邵亦涵",'240411':"邵思晴",'240412':"罗怡霖",
+                '240413':"金品希",'240414':"饶昀"  ,'240415':"秦黄蕊",
+                '240416':"桂诗韵",'240417':"顾思仪",'240418':"黄思绮",
+                '240419':"黄语菲",'240420':"曹锦秀",'240421':"梁彦欣",
+                '240422':"温璐宁",'240423':"卫澜"  ,'240424':"王屹杨",
+                '240425':"王皓平",'240426':"邓湛"  ,'240427':"史炜乐",
+                '240428':"任思渔",'240429':"严睿扬",'240430':"李晟淏",
+                '240431':"佘轶舟",'240432':"张乙夏",'240433':"张金皓",
+                '240434':"张既同",'240435':"陈麟杰",'240436':"郁佳一",
+                '240437':"金泰仰",'240438':"周津仕",'240439':"赵国桓",
+                '240440':"胡健宇",'240441':"费云帆",'240442':"蒋奕铭",
+                '240443':"魏舒天",'240444':"李欣宜",'240445':"吕一飞"}
+                if (name_list[inum] == iname) {
+                var wr=old+'\n<tr><td>'+inum+'_'+iname+' 已打卡 time:'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'_'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'.'+time.getMilliseconds()+'</td></tr>'
+                document.getElementById("out").innerHTML=wr
+                alert('打卡成功!');}
+                else {alert('学号与姓名不匹配!')};}
+            else {alert('请输入六位学号!')}
+            ;}
+        </script>
+    </div>  
+</body>  
+</html>  
