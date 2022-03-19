@@ -45,6 +45,7 @@
                     var wr=old+'\n<tr><td>'+inum+'_'+iname+' 已打卡 time:'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'_'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'.'+time.getMilliseconds()+'</td></tr>'
                     document.getElementById("out").innerHTML=wr
                     location.href='check.html?number='+inum+'&name='+iname
+                    setTimeOut(()=>{location.reload(true)},1000)
                     alert('打卡成功!');}
                     else {alert('已签到!')};}
                 else if (iname == 'CLEAR' && inum == '114514'){
