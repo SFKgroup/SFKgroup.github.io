@@ -2072,7 +2072,7 @@ input[type="submit"].large, input[type="reset"].large, input[type="button"].larg
 }
 
 input[type="submit"].disabled, input[type="submit"]:disabled, input[type="reset"].disabled, input[type="reset"]:disabled, input[type="button"].disabled, input[type="button"]:disabled, button.disabled, button:disabled, .button.disabled, .button:disabled {
-    pointer-events: none;
+    pointer-events: auto;
     opacity: 0.25;
 }
 
@@ -3044,7 +3044,7 @@ table.alt tbody tr td {
 }
 
 #wrapper.fade-in:before {
-    pointer-events: none;
+    pointer-events: auto;
     -moz-transition: opacity 1s ease-in-out;
     -webkit-transition: opacity 1s ease-in-out;
     -ms-transition: opacity 1s ease-in-out;
@@ -3186,7 +3186,7 @@ body.is-preload #wrapper.fade-in:before {
 }
 
 #intro.hidden {
-    pointer-events: none;
+    pointer-events: auto;
     -moz-transform: translateY(2rem);
     -webkit-transform: translateY(2rem);
     -ms-transform: translateY(2rem);
@@ -3280,7 +3280,7 @@ body.is-preload #intro:not(.hidden) + #header + #nav {
     -webkit-justify-content: -webkit-flex-end;
     -ms-justify-content: -ms-flex-end;
     justify-content: flex-end;
-    pointer-events: none;
+    pointer-events: auto;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -4328,7 +4328,7 @@ body.is-preload #intro:not(.hidden) + #header + #nav {
     right: 0;
     text-align: right;
     top: 0;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
     width: 7rem;
 }
 
