@@ -2307,6 +2307,9 @@
 
 
 <script>
+    var zoom = Math.round(window.screen.height * 100 / 864)
+    console.log(window.screen.height,zoom)
+    document.body.style.zoom = zoom + '%';
     var weight = {}
     function strong(data){
         var color = "#DDFFDDAA"
