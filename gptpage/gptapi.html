@@ -1,0 +1,113 @@
+<head>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <title>ChatGPT</title>
+    <link rel="stylesheet" href="./gpt.css" type="text/css" />
+</head>
+
+<body>
+    <table>
+        <tbody id="gpt_ans">
+            <tr>
+                <th class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="3em" height="3em">
+                        <path
+                            d="M29.71,13.09A8.09,8.09,0,0,0,20.34,2.68a8.08,8.08,0,0,0-13.7,2.9A8.08,8.08,0,0,0,2.3,18.9,8,8,0,0,0,3,25.45a8.08,8.08,0,0,0,8.69,3.87,8,8,0,0,0,6,2.68,8.09,8.09,0,0,0,7.7-5.61,8,8,0,0,0,5.33-3.86A8.09,8.09,0,0,0,29.71,13.09Zm-12,16.82a6,6,0,0,1-3.84-1.39l.19-.11,6.37-3.68a1,1,0,0,0,.53-.91v-9l2.69,1.56a.08.08,0,0,1,.05.07v7.44A6,6,0,0,1,17.68,29.91ZM4.8,24.41a6,6,0,0,1-.71-4l.19.11,6.37,3.68a1,1,0,0,0,1,0l7.79-4.49V22.8a.09.09,0,0,1,0,.08L13,26.6A6,6,0,0,1,4.8,24.41ZM3.12,10.53A6,6,0,0,1,6.28,7.9v7.57a1,1,0,0,0,.51.9l7.75,4.47L11.85,22.4a.14.14,0,0,1-.09,0L5.32,18.68a6,6,0,0,1-2.2-8.18Zm22.13,5.14-7.78-4.52L20.16,9.6a.08.08,0,0,1,.09,0l6.44,3.72a6,6,0,0,1-.9,10.81V16.56A1.06,1.06,0,0,0,25.25,15.67Zm2.68-4-.19-.12-6.36-3.7a1,1,0,0,0-1.05,0l-7.78,4.49V9.2a.09.09,0,0,1,0-.09L19,5.4a6,6,0,0,1,8.91,6.21ZM11.08,17.15,8.38,15.6a.14.14,0,0,1-.05-.08V8.1a6,6,0,0,1,9.84-4.61L18,3.6,11.61,7.28a1,1,0,0,0-.53.91ZM12.54,14,16,12l3.47,2v4L16,20l-3.47-2Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </th>
+                <th>
+                    <div class="leading-relaxed break-words rounded-md markdown-body">
+                        <p id="active">Hello world.</p>
+                    </div>
+                </th>
+                <th class="icon"></th>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <td><input type="text" id="fname" autofocus onkeydown="calAge(event)"></td>
+            <td class="butt"><button type="button" onclick="ask()">发送</button></td>
+        </tr>
+    </table>
+    <div class="floating-elem">我们推荐您使用正版ChatGPT|本页面使用cbjtestapi.binjie.site:7777接口|<a href="http://sfkgroup.github.io" target="_blank">SFKgroup</a></div>
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.onprogress = function (event) {
+            document.querySelector("#active").innerText = event.target.responseText;
+        };
+        function ask() {
+            var data = document.getElementById('fname').value
+            document.querySelector("#active").setAttribute("id", "desable")
+            document.getElementById('gpt_ans').appendChild(createSend(data))
+            document.getElementById('gpt_ans').appendChild(createAns(' '))
+            xhr.open('POST', 'https://cbjtestapi.binjie.site:7777/api/generateStream');
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(`{
+                "prompt": "`+ data + `",
+                "userId": "#/chat/1680787995735",
+                "network": true
+            }`);
+        }
+        function calAge(e) {
+            var evt = window.event || e;
+            if (evt.keyCode == 13) {
+                ask()
+            }
+        }
+
+        function createAns(data) {
+            var container = document.createElement("tr");
+            var e_0 = document.createElement("td");
+            var e_5 = document.createElement("td");
+            var e_6 = document.createElement("td");
+            var e_1 = document.createElement("svg");
+            e_1.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+            e_1.setAttribute("viewBox", "0 0 32 32");
+            //e_1.setAttribute("aria-hidden", "true");
+            e_1.setAttribute("width", "3em");
+            e_1.setAttribute("height", "3em");
+            var e_2 = document.createElement("path");
+            e_2.setAttribute("d", "M29.71,13.09A8.09,8.09,0,0,0,20.34,2.68a8.08,8.08,0,0,0-13.7,2.9A8.08,8.08,0,0,0,2.3,18.9,8,8,0,0,0,3,25.45a8.08,8.08,0,0,0,8.69,3.87,8,8,0,0,0,6,2.68,8.09,8.09,0,0,0,7.7-5.61,8,8,0,0,0,5.33-3.86A8.09,8.09,0,0,0,29.71,13.09Zm-12,16.82a6,6,0,0,1-3.84-1.39l.19-.11,6.37-3.68a1,1,0,0,0,.53-.91v-9l2.69,1.56a.08.08,0,0,1,.05.07v7.44A6,6,0,0,1,17.68,29.91ZM4.8,24.41a6,6,0,0,1-.71-4l.19.11,6.37,3.68a1,1,0,0,0,1,0l7.79-4.49V22.8a.09.09,0,0,1,0,.08L13,26.6A6,6,0,0,1,4.8,24.41ZM3.12,10.53A6,6,0,0,1,6.28,7.9v7.57a1,1,0,0,0,.51.9l7.75,4.47L11.85,22.4a.14.14,0,0,1-.09,0L5.32,18.68a6,6,0,0,1-2.2-8.18Zm22.13,5.14-7.78-4.52L20.16,9.6a.08.08,0,0,1,.09,0l6.44,3.72a6,6,0,0,1-.9,10.81V16.56A1.06,1.06,0,0,0,25.25,15.67Zm2.68-4-.19-.12-6.36-3.7a1,1,0,0,0-1.05,0l-7.78,4.49V9.2a.09.09,0,0,1,0-.09L19,5.4a6,6,0,0,1,8.91,6.21ZM11.08,17.15,8.38,15.6a.14.14,0,0,1-.05-.08V8.1a6,6,0,0,1,9.84-4.61L18,3.6,11.61,7.28a1,1,0,0,0-.53.91ZM12.54,14,16,12l3.47,2v4L16,20l-3.47-2Z");
+            e_2.setAttribute("fill", "currentColor");
+            e_1.appendChild(e_2);
+            e_0.appendChild(e_1);
+            var e_3 = document.createElement("div");
+            e_3.setAttribute("class", "leading-relaxed break-words rounded-md markdown-body chat-bubble left");
+            var e_4 = document.createElement("p");
+            e_4.setAttribute("id", "active");
+            e_4.appendChild(document.createTextNode(data));
+            e_3.appendChild(e_4);
+            e_5.appendChild(e_3);
+            e_0.setAttribute('class', 'icon')
+            e_6.setAttribute('class', 'icon')
+            container.appendChild(e_0);
+            container.appendChild(e_5);
+            container.appendChild(e_6);
+            return container;
+        }
+        function createSend(data) {
+            var container = document.createElement("tr");
+            var e_0 = document.createElement("td");
+            var e_5 = document.createElement("td");
+            var e_6 = document.createElement("td");
+            var e_7 = document.createElement("img");
+            e_7.setAttribute("src", "./user.jpg");
+            e_7.setAttribute("width", "50em");
+            e_7.setAttribute("height", "50em");
+            var e_3 = document.createElement("div");
+            e_3.setAttribute("class", "leading-relaxed break-words ans-md markdown-body chat-bubble right");
+            var e_4 = document.createElement("p");
+            e_4.appendChild(document.createTextNode(data));
+            e_3.appendChild(e_4);
+            e_5.appendChild(e_3);
+            e_6.appendChild(e_7);
+            e_0.setAttribute('class', 'icon')
+            e_6.setAttribute('class', 'icon')
+            container.appendChild(e_0);
+            container.appendChild(e_5);
+            container.appendChild(e_6);
+            return container;
+        }
+    </script>
+</body>
