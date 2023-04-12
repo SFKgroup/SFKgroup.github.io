@@ -38,6 +38,7 @@
         };
         function ask() {
             var data = document.getElementById('fname').value
+            document.getElementById('fname').value = ''
             document.querySelector("#active").setAttribute("id", "desable")
             document.getElementById('gpt_ans').appendChild(createSend(data))
             document.getElementById('gpt_ans').appendChild(createAns(' '))
