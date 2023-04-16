@@ -42,7 +42,7 @@
             document.querySelector("#active").setAttribute("id", "desable")
             document.getElementById('gpt_ans').appendChild(createSend(data))
             document.getElementById('gpt_ans').appendChild(createAns(' '))
-            xhr.open('POST', 'https://cbjtestapi.binjie.site:7777/api/generateStream');
+            xhr.open('POST', 'https://api.aichatos.cloud/api/generateStream');
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.send(`{
                 "prompt": "`+ data + `",
