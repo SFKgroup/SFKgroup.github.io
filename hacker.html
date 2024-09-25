@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>WannaCry Malware UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            cursor: none;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+
+
+
+        .malware-info {
+            font-size: 18px;
+        }
+
+        #matrix {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+
+        #canvas {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        ol {
+            color: #ffee00;
+        }
+    </style>
+
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false" onbeforecopy="return false"
+    oncopy=document.selection.empty() onselect=document.selection.empty()>
+    <canvas id="canvas"></canvas>
+    <canvas id="matrix"></canvas>
+
+    <h1>WannaCry Malware Infected!</h1>
+    <div class="malware-info">
+        <p id="typing3"></p>
+        <div id="typing-text1"></div>
+        <p>To decrypt your files, follow these steps:</p>
+        <ol>
+            <li id="typing5"></li>
+            <li id="typing6"></li>
+            <li id="typing4"></li>
+        </ol>
+        <div id="typing-text4"></div>
+        <p id="typing1"></p>
+        <p id="typing2"></p>
+
+        <div id="typing-text3"></div>
+        <div id="typing-text2"></div>
+
+        <ol>
+            <li id="typing7"></li>
+            <li id="typing8"></li>
+            <li id="typing9"></li>
+        </ol>
+
+        <div id="typing-text5"></div>
+    </div>
+
+
+
+    <script>
+        document.onkeydown = function () {
+            if (window.event && window.event.keyCode != 122) {
+                event.keyCode = 0;
+                event.returnValue = false;
+                return false;
+            }
+        };
+
+        document.onkeyup = function () {
+            if (window.event && window.event.keyCode != 122) {
+                event.keyCode = 0;
+                event.returnValue = false;
+                return false;
+            }
+        };
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let virus;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Virus {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 100;
+                this.speed = Math.random() * 0.05;
+                this.r = Math.floor(Math.random() * 256);
+                this.g = Math.floor(Math.random() * 256);
+                this.b = Math.floor(Math.random() * 256);
+                this.color = `rgb(${this.r}, ${this.g},  ${this.b})`;
+            }
+
+            update() {
+                this.x += (canvas.width / 2 - this.x) * this.speed;
+                this.y += (canvas.height / 2 - this.y) * this.speed;
+                this.size -= 1;
+                switch (Math.floor(Math.random() * 3)) {
+                    case 0: this.r -= 1
+                    case 1: this.g -= 1
+                    case 2: this.b -= 1
+                }
+                this.color = `rgb(${this.r}, ${this.g},  ${this.b})`;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (!virus) {
+                virus = new Virus();
+            } else {
+                virus.update();
+                if (virus.size < 0) virus = null;
+            }
+            virus && virus.draw();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        const canvas_2 = document.getElementById("matrix");
+        //获取 canvas 元素及其上下文
+        const ctx_2 = canvas_2.getContext("2d");
+        //设置 canvas 的宽度和高度为窗口的宽度和高度
+        canvas_2.width = window.innerWidth;
+        canvas_2.height = window.innerHeight;
+        //定义字母集合、字体大小以及列数
+        const letters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&&*+~";
+        const fontSize = 16;
+        const columns = canvas_2.width / fontSize;
+        //创建一个长度为 columns 的数组，并将每个元素初始化为 1
+        const drops = Array.from({ length: columns }).map(() => 1);
+        function draw() {
+            ctx_2.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx_2.fillRect(0, 0, canvas_2.width, canvas_2.height);
+
+            // ctx.fillStyle = "#0F0";
+            ctx_2.font = `${fontSize}px monospace`;
+            drops.forEach((y, i) => {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                //设置随机颜色
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+                ctx_2.fillStyle = `rgb(${r},${g},${b})`;
+                const x = i * fontSize;
+                ctx_2.fillText(text, x, y * fontSize);
+                //某列超过屏幕高度，则重置其位置
+                if (y * fontSize > canvas_2.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+
+        setInterval(draw, 33);
+
+        function typeText4ever(selector) {
+            const element = document.querySelector(selector);
+            let index = 0;
+            const letter = 'aaaaabcdeeeeefghiiiijklmnooopqrstuuuvwxyz        '
+            const words = ['FUCK','fuck','Damn','damn','shit','SHIT','BITCH','bitch','']
+            const interval = setInterval(() => {
+                if (Math.random() < 0.05){
+                    element.textContent += ' '+words[Math.floor(Math.random() * (words.length-1))]+' '
+                    return 0
+                }
+                if (index < Math.floor(Math.random() * 100 + 100)) {
+                    element.textContent += letter.charAt(Math.floor(Math.random() * letter.length));
+                } else {
+                    element.textContent = letter.charAt(Math.floor(Math.random() * letter.length));
+                }
+
+            }, Math.floor(Math.random() * 50 + 50)); // 调整速度
+        }
+
+        function typeText(selector, text) {
+            const element = document.querySelector(selector);
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < text.length) {
+                    element.textContent += text[index++];
+                } else {
+                    clearInterval(interval);
+                }
+            }, 50); // 调整速度
+        }
+
+        setTimeout(() => { typeText4ever('#typing-text1'); }, Math.floor(Math.random() * 1000))
+        setTimeout(() => { typeText4ever('#typing-text2'); }, Math.floor(Math.random() * 1000))
+        setTimeout(() => { typeText4ever('#typing-text3'); }, Math.floor(Math.random() * 500))
+        setTimeout(() => { typeText4ever('#typing-text4'); }, Math.floor(Math.random() * 2000))
+        setTimeout(() => { typeText4ever('#typing-text5'); }, Math.floor(Math.random() * 2000))
+
+        typeText('#typing1', 'Note: The decryption tool is only available in English and is intended for use by UK government agencies.')
+        setTimeout(() => { typeText('#typing2', 'Don\'t try to decrypt the message yourself, it will be a waste of time.'); }, Math.floor(Math.random() * 500))
+        typeText('#typing3', 'Your system has been infected by the WannaCry ransomware. Files on your system have been encrypted and your access to them has been blocked.')
+        typeText('#typing4', 'To decrypt your files, please contact the UK government agency responsible for the decryption of the files.')
+        setTimeout(() => { typeText('#typing5', 'Pay the ransom (this is not recommended as it does not guarantee your files will be returned)'); }, Math.floor(Math.random() * 500))
+        typeText('#typing6', 'Visit the official UK National Cyber Security Centre website for a decryption tool')
+        typeText('#typing7', 'https://www.gov.uk/government/organisations/national-cyber-security-centre');
+        typeText('#typing8', 'If you are not a UK government agency, please contact your local law enforcement authorities.')
+        setTimeout(() => {
+            typeText('#typing9', 'Thank you for your understanding.');
+        }, Math.floor(Math.random() * 500))
+
+
+    </script>
+</body>
+
+</html>
